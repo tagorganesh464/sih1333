@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "poppins", sans-serif;
+}
+.register {
+
+  color: white;
+}
+
+
+.title {
+  width: 100%;
+  margin-bottom: 2.5rem;
+  font-size: 3rem;
+  text-align: center;
+}
+
+
+
+.dog {
+    
+  padding: 2rem 2rem;
+  max-width: 30rem;
+
+ 
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  backdrop-filter: blur(1rem);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-left-color: rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-right-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+.inputbox1 input {
+  width: 80%;
+  margin-bottom: 3.5rem;
+}
+
+.inputbox1 i {
+  position: absolute;
+  right: 12%;
+
+  font-size: 1.2em;
+  top: 20px;
+}
+
+@media screen and (min-width: 480px) {
+  .dog {
+    transform: translateX(90%); /* Move the element to the right when the screen is at least 480 pixels wide */
+  }
+}
