@@ -18,11 +18,13 @@
 }
 
 
-
+.form-select{
+  width: 80%;
+}
 .dog {
     
-  padding: 2rem 2rem;
-  max-width: 30rem;
+  padding: 1rem 1rem;
+  
 
  
   border-radius: 1rem;
@@ -45,7 +47,10 @@
   width: 80%;
   margin-bottom: 3.5rem;
 }
-
+.inputbox1 select {
+  width: 80%;
+  margin-bottom: 3.5rem;
+}
 .inputbox1 i {
   position: absolute;
   right: 12%;
@@ -54,8 +59,3 @@
   top: 20px;
 }
 
-@media screen and (min-width: 480px) {
-  .dog {
-    transform: translateX(90%); /* Move the element to the right when the screen is at least 480 pixels wide */
-  }
-}

@@ -36,30 +36,26 @@ function Login() {
     <div className="inputbox form-floating">
       <i className="fa-regular fa-user"></i>
       <input
-        type="text"
-        id="username"
+        type="email"
+        id="email"
         className="form-control "
-        {...register("username", {
+        {...register("email", {
           required: true,
           minLength: 4,
-          maxLength: 22,
+          
         })}
         placeholder="xyz"
       ></input>
-        <label htmlFor="username" className="text-dark" >
-        UserName
+        <label htmlFor="email" className="text-dark" >
+        email
       </label>
       {errors.username?.type === "required" && (
-        <p className=" text-danger">*enter your first name</p>
+        <p className=" text-danger">*enter your email</p>
       )}
       {errors.username?.type === "minLength" && (
         <p className=" text-danger">*minimum 4 letter word is required</p>
       )}
-      {errors.username?.type === "maxLength" && (
-        <p className=" text-danger">
-          *maximum 22 letter word is required
-        </p>
-      )}
+      
     </div>
 
     <div className="inputbox form-floating">

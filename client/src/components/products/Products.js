@@ -15,7 +15,7 @@ const goToMockTests=()=>{
 
   return (
     <div>
-        <div class=" mt-5 d-flex justify-content-evenly">
+        <div className=" mt-5 d-flex justify-content-evenly">
   
   <div className="card card-p" onClick={goToMockTests}>
         <img className="card-img-top img3" src={img3} alt="Card image cap"></img>
@@ -48,7 +48,7 @@ const goToMockTests=()=>{
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <button className="btn btn-secondary p-0 d-block m-auto"><Link
+          <button className="btn btn-primary p-0 d-block m-auto"><Link
             id="link"
             className="nav-link "
             style={{ padding: "1.3rem" }}

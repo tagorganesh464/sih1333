@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import NavbarMain from "../navbar/NavbarMain";
+import Footer from "../footer/Footer";
 
 import "./RootLayout.css";
 import { Outlet,useLocation } from "react-router-dom";
@@ -33,18 +34,21 @@ function RootLayout() {
     <div
       className={path}
     >
+      <div className="body-main">
       <div className="head">
       <NavbarMain/>
       </div>
       
 
       {/* placeholder */}
-      <div className="main">
+      <div className="main ">
         <Outlet />
       </div>
-      
+      <div className="sticky-footer">
+        <Footer/>
+      </div>
        
-      
+      </div>
     </div>
   );
 }

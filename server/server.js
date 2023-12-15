@@ -30,7 +30,7 @@ mclient
     let userCollection = usersdbObj.collection("usercollection");
     let jobCollection = usersdbObj.collection("jobcollection");
     let courseCollection = usersdbObj.collection("coursecollection");
-    
+    let sampleCollection = usersdbObj.collection("samplecollection");
 
 
     console.log("connected to DB successfully");
@@ -39,6 +39,7 @@ mclient
     app.set("userCollection", userCollection);
     app.set("jobCollection", jobCollection);
     app.set("courseCollection", courseCollection);
+    app.set("sampleCollection", sampleCollection);
     
     
   })
