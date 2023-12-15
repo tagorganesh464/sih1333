@@ -29,6 +29,7 @@ mclient
     let usersdbObj = dbRef.db("usersdb");
     let userCollection = usersdbObj.collection("usercollection");
     let jobCollection = usersdbObj.collection("jobcollection");
+    let courseCollection = usersdbObj.collection("coursecollection");
     
 
 
@@ -37,6 +38,7 @@ mclient
     // share collections objects to APIs
     app.set("userCollection", userCollection);
     app.set("jobCollection", jobCollection);
+    app.set("courseCollection", courseCollection);
     
     
   })
@@ -44,10 +46,12 @@ mclient
 
 const userapp = require("./APIs/userApi");
 const jobapp = require("./APIs/jobApi");
+const courseapp = require("./APIs/courseApi");
 
 
 app.use("/user-api", userapp);
 app.use("/job-api", jobapp);
+app.use("/course-api", courseapp);
 
 
 // create a middleware to handle invalid path

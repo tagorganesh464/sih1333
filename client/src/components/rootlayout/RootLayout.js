@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import NavbarMain from "../navbar/NavbarMain";
-import { domainContext } from "../../context/DomainContextProvider";
+
 import "./RootLayout.css";
 import { Outlet,useLocation } from "react-router-dom";
 import { useState } from "react";

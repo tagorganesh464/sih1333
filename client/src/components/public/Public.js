@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { imgDB, txtDB } from "../config/firebase.config";
+import React, { useState, useEffect} from "react";
+import { imgDB } from "../config/firebase.config";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
