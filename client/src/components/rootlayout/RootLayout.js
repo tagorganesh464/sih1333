@@ -78,7 +78,7 @@ function RootLayout() {
         <div className="sidebar " style={{marginTop:"6rem"}}>
         
             <button
-              style={{ backgroundColor: "red" }}
+              style={{ backgroundColor: "red"}}
               onClick={() => changeColor("red")}
             ></button>
             <button

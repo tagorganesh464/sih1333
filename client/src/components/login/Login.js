@@ -29,7 +29,7 @@ function Login() {
  {error?.length !== 0 && <p className="text-danger display-1"> {error}</p>}
      
      
-    <div className="cat m-auto mt-5 " >
+    <div className="cat m-auto shadow-lg  rounded" >
     <h2 className="title">Login</h2>
     <form onSubmit={handleSubmit(handleUserLogin)} action="">
     

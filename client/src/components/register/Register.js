@@ -20,13 +20,12 @@ const Register = () => {
     axios
       .post(`/user-api/register-user`, newUser)
       .then((response) => {
-       
         if (response.status === 201) {
           navigate("/login");
         }
         if (response.status !== 201) {
           setError(response.data.message);
-          alert(response.data.message)
+          alert(response.data.message);
         }
       })
       .catch((err) => {
@@ -50,7 +49,7 @@ const Register = () => {
       {/* first row for username */}
       {error?.length !== 0 && <p className="text-danger display-1"> {error}</p>}
 
-      <div className="card dog  bg-transparent  my-5">
+      <div className="dog  shadow-lg  rounded my-5">
         <div className="card-body   ">
           <h3 className="title">Sign up</h3>
 
@@ -166,25 +165,24 @@ const Register = () => {
               {/* second row   */}
               {/*  another col */}
               <div className="col-md-10 col-lg-6 col-xl-5  ">
-              <div className="inputbox1 form-floating py-0 mb-5">
-                   
-                   <select
-                     className="form-select py-0 "
-                     defaultValue=""
-                     {...register("gender", { required: true })}
-                   >
-                     <option value="" disabled>
-                       Choose gender
-                     </option>
-                     <option value="male">Male</option>
-                     <option value="female">Female</option>
-                   </select>
+                <div className="inputbox1 form-floating py-0 mb-5">
+                  <select
+                    className="form-select py-0 "
+                    defaultValue=""
+                    {...register("gender", { required: true })}
+                  >
+                    <option value="" disabled>
+                      Choose gender
+                    </option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
 
-                   {errors.gender?.type === "required" && (
-                     <p className=" text-danger">*Select your gender</p>
-                   )}
-                    <i className="fa-solid fa-square-caret-down"></i>
-                 </div>
+                  {errors.gender?.type === "required" && (
+                    <p className=" text-danger">*Select your gender</p>
+                  )}
+                  <i className="fa-solid fa-square-caret-down"></i>
+                </div>
 
                 {/* third row  contains Email and Phone Number*/}
 
@@ -228,55 +226,54 @@ const Register = () => {
                   )}
                 </div>
                 <div className="inputbox1 form-floating py-0 mb-5">
-                   
-                    <select
-                      className="form-select py-0 "
-                      defaultValue=""
-                      {...register("category", { required: true })}
-                    >
-                      <option value="" disabled>
-                        Choose Category Type
-                      </option>
-                      <option value="D">Category-D</option>
-                      <option value="E">Category-E</option>
-                    </select>
+                  <select
+                    className="form-select py-0 "
+                    defaultValue=""
+                    {...register("category", { required: true })}
+                  >
+                    <option value="" disabled>
+                      Choose Category Type
+                    </option>
+                    <option value="D">Category-D</option>
+                    <option value="E">Category-E</option>
+                  </select>
 
-                    {errors.category?.type === "required" && (
-                      <p className=" text-danger">*Select your category Type</p>
-                    )}
-                     <i className="fa-solid fa-square-caret-down"></i>
-                  </div>
-                  <div className="inputbox1 form-floating">
+                  {errors.category?.type === "required" && (
+                    <p className=" text-danger">*Select your category Type</p>
+                  )}
+                  <i className="fa-solid fa-square-caret-down"></i>
+                </div>
+                <div className="inputbox1 form-floating">
                   <i className="fa-solid fa-user-magnifying-glass"></i>
-                    <input
-                      type="text"
-                      id="udid"
-                      className="form-control "
-                      placeholder="udid"
-                      {...register("udid", {
-                        required: true,
-                        minLength:18,
-                        maxLength: 18,
-                      })}
-                    ></input>
-                    <label htmlFor="udid" className="text-dark">
-                      UDID
-                    </label>
+                  <input
+                    type="text"
+                    id="udid"
+                    className="form-control "
+                    placeholder="udid"
+                    {...register("udid", {
+                      required: true,
+                      minLength: 18,
+                      maxLength: 18,
+                    })}
+                  ></input>
+                  <label htmlFor="udid" className="text-dark">
+                    UDID
+                  </label>
 
-                    {errors.udid?.type === "required" && (
-                      <p className=" text-danger">*enter your UDID </p>
-                    )}
+                  {errors.udid?.type === "required" && (
+                    <p className=" text-danger">*enter your UDID </p>
+                  )}
                   {errors.udid?.type === "minLength" && (
-                      <p className=" text-danger">
-                        *minimum 18 letter word is required
-                      </p>
-                    )}
-                    {errors.udid?.type === "maxLength" && (
-                      <p className=" text-danger">
-                        *maximum 18 letter word is required
-                      </p>
-                    )}
-                  </div>
+                    <p className=" text-danger">
+                      *minimum 18 letter word is required
+                    </p>
+                  )}
+                  {errors.udid?.type === "maxLength" && (
+                    <p className=" text-danger">
+                      *maximum 18 letter word is required
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 

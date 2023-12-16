@@ -1,0 +1,56 @@
+
+.post-ratings-container {
+	display: flex;
+	justify-content: end;
+	padding: 12px 0;
+}
+
+.post-rating {
+	display: flex;
+	align-items: center;
+	cursor: default;
+}
+
+.post-rating:not(:last-child) {
+	margin-right: 12px;
+}
+
+.post-rating-selected > .post-rating-button,
+.post-rating-selected > .post-rating-count {
+	color: #009578;
+}
+
+.post-rating-button {
+	margin-right: 6px;
+	cursor: pointer;
+	color: #555555;
+}
+
+.post-rating:not(.post-rating-selected) > .post-rating-button:hover {
+	color: #000000;
+}
+.inputbox2 input {
+    width: 80%;
+    margin-bottom: 3.5rem;
+  }
+  
+  .inputbox2 i {
+    position: absolute;
+    right: 8px;
+  
+    font-size: 1.2em;
+    top: 20px;
+  }
+  
+  .spider-man{
+    
+    
+    color: black;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1rem );
+    -webkit-backdrop-filter: blur( 1rem );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
