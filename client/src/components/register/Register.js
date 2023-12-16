@@ -20,7 +20,7 @@ const Register = () => {
     axios
       .post(`/user-api/register-user`, newUser)
       .then((response) => {
-        console.log(response.status)
+       
         if (response.status === 201) {
           navigate("/login");
         }

@@ -9,23 +9,35 @@ function NavbarMain() {
   let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
     useContext(loginContext);
 
-    useEffect(() => {
-      const script = document.createElement('script');
-      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      document.body.appendChild(script);
+ 
+    // useEffect(() => {
+    //   const script = document.createElement('script');
+    //   script.type = 'text/javascript';
+    //   script.text = `
+    //     function googleTranslateElementInit() {
+    //       new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    //     }
+    //   `;
+    //   document.body.appendChild(script);
   
-      script.onload = () => {
-        window.googleTranslateElementInit = () => {
-          new window.google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-        };
-      };
+    //   const translateScript = document.createElement('script');
+    //   translateScript.type = 'text/javascript';
+    //   translateScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    //   translateScript.async = true;
+    //   document.body.appendChild(translateScript);
   
-      return () => {
-        document.body.removeChild(script);
-        delete window.googleTranslateElementInit;
-      };
-    }, []);
+    //   return () => {
+    //     document.body.removeChild(script);
+    //     document.body.removeChild(translateScript);
+  
+    //     // Check if the property exists before attempting to delete
+    //     if (window && window.googleTranslateElementInit) {
+    //       delete window.googleTranslateElementInit;
+    //     }
+    //   };
+    // }, []);
+    
+    
   return (
     <Navbar expand="lg" className="p-0 body ">
       <div className="container-fluid px-3 body1">
@@ -43,7 +55,11 @@ function NavbarMain() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto  ">
             <ul className="navbar-nav menu ms-auto text-decoration-none">
-              <li className="nav-item active">
+             
+
+              {!userLoginStatus ? (
+                <ul className="navbar-nav menu ms-auto text-decoration-none">
+                   <li className="nav-item active">
                 <Link
                   className="nav-link  "
                   style={{ padding: "1.3rem" }}
@@ -52,9 +68,6 @@ function NavbarMain() {
                   Home
                 </Link>
               </li>
-
-              {!userLoginStatus ? (
-                <ul className="navbar-nav menu ms-auto text-decoration-none">
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link   "
@@ -76,6 +89,15 @@ function NavbarMain() {
                 </ul>
               ) : (
                 <ul className="navbar-nav menu ms-auto text-decoration-none">
+                   <li className="nav-item active">
+                <Link
+                  className="nav-link  "
+                  style={{ padding: "1.3rem" }}
+                  to="/"
+                >
+                  Home
+                </Link>
+              </li>
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link "
@@ -90,7 +112,7 @@ function NavbarMain() {
                     <Link
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
-                      to="/jobs"
+                      to="/jobs/public"
                     >
                       Jobs
                     </Link>
@@ -99,25 +121,17 @@ function NavbarMain() {
                     <Link
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
-                      to="/courses"
+                      to="/products"
                     >
-                      Courses
+                      Products
                     </Link>
                   </li>
-                  <li className="nav-item dropdown">
-                    <Link
-                      className="nav-link "
-                      style={{ padding: "1.3rem" }}
-                      to="/mocktest"
-                    >
-                      Mock Test
-                    </Link>
-                  </li>
+                 
                 </ul>
               )}
 
               <li className="nav-item active">
-              <div id="google_translate_element"></div>
+              {/* <div id="google_translate_element"></div> */}
               </li>
             </ul>
           </Nav>

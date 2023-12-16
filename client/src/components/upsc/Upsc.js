@@ -6,7 +6,7 @@ const Upsc = () => {
     <div>
       
       <div className="row g-0">
-        <div className="col-sm-6 col-md-2">
+        <div className="col-sm-2 col-md-2">
         <Navbar />
         </div>
   <div className="col-sm-6 col-md-10"><Outlet/></div>

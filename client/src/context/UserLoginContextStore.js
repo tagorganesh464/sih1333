@@ -9,7 +9,7 @@ function UserLoginContextStore({children}){
     let[userLoginStatus,setUserLoginStatus]=useState(false)
     
     let url=window.location.href;
-    let baseURL = url.split("/").slice(0, 3).join("/")
+  
     
     
     

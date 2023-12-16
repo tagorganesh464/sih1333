@@ -17,6 +17,7 @@ import Banking from "./components/banking/Banking";
 import Railway from "./components/railway/Railway";
 import SoftwareDevelopment from "./components/software-development/SoftwareDevelopment";
 import UpscIasFoundation from "./components/upsc-ias-foundation/UpscIasFoundation";
+import Law from "./components/law/Law";
 // import EmpProfile from "./components/empprofile/EmpProfile";
 
 
@@ -66,6 +67,13 @@ function App() {
         {
           path: "/mock-tests",
           element: <MockTests />,
+          children:[
+            {
+              path: "law",
+              element: <Law />,
+            },
+          ]
+       
         },
         {
           path: "/upsc",

@@ -2,7 +2,7 @@
 margin: 0;
 padding: 0;
 }
-.home,.login{
+.login{
   background-image: url(../../images/img1.png);
   background-position:center;
   background-repeat: no-repeat;
@@ -37,6 +37,21 @@ padding: 0;
   background-color: var(--helper-tint);
 
 } */
+.sidebar {
+  position: fixed;
+  top: 25%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sidebar button {
+  margin-bottom: 5px;
+  height: 30px;
+  width: 60px;
+}
 
 
 

@@ -40,7 +40,7 @@ const goToMockTests=()=>{
       </div>
   
  
-      <div className="card card-p" onClick={goToCourses} >
+      <div className="card card-p " onClick={goToCourses} >
         <img className="card-img-top img3" src={img4} alt="Card image cap"></img>
         <div className="card-body">
           <h5 className="card-title">Courses</h5>
