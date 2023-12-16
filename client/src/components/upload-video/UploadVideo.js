@@ -1,5 +1,6 @@
 import React, { useState, useContext ,useEffect} from "react";
 import axios from 'axios';
+import { loginContext } from "../../context/loginContext";
 
 import { topicContext } from "../../context/TopicContextProvider";
 import {useLocation } from "react-router-dom";
@@ -30,7 +31,7 @@ const UploadVideo = () => {
     reset,
   } = useForm();
   const [file, setFile] = useState(null);
-  let [error, setError] = useState("");
+  let [errorr, setError] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadComplete, setUploadComplete] = useState(false); // New state variable
   let [topic, setTopic] = useContext(topicContext);
@@ -150,16 +151,19 @@ const UploadVideo = () => {
     setUploadProgress(0);
     setUploadComplete(false);
   };
-
+  let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
+  useContext(loginContext);
   return (
+    
     <div>
+      {userLoginStatus && role==="admin" && 
       <Button
         className="btn btn-dark d-block ms-auto p-3 mt-2 mx-2 "
         onClick={handleShow}
       >
         <i className="fa-solid fa-cart-plus"></i>
       </Button>
-
+}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Upload</Modal.Title>

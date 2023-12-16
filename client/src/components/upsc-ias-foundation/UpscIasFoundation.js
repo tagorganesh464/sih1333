@@ -1,5 +1,7 @@
 import ReactPlayer from 'react-player'
-import React, { useState, useContext ,useEffect} from "react";
+
+import React, { useState, useContext,useEffect } from "react";
+
 import { topicContext } from "../../context/TopicContextProvider";
 import axios from 'axios';
 
@@ -53,8 +55,9 @@ const TopicCard = ({ title, description, videoUrl }) => {
 };
 
 const UpscIasFoundation = () => {
+
   let [topic, setTopic] = useContext(topicContext);
-  let [error, setError] = useState("");
+  let [errorr, setError] = useState("");
   const getCourses = () => {
     axios
       .get(`course-api/get-course/UPSC-IAS-Foundation`)
@@ -86,6 +89,7 @@ const UpscIasFoundation = () => {
   }, []);
   return (
     <div id="cards_landscape_wrap-2">
+    
       <UploadVideo/>
       <div className="container">
      

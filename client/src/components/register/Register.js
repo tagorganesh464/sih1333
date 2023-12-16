@@ -17,6 +17,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   let formSubmit = (newUser) => {
+    newUser = { ...newUser, role: "customer", tasks: [] };
     axios
       .post(`/user-api/register-user`, newUser)
       .then((response) => {

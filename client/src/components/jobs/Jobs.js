@@ -5,22 +5,22 @@ import "./Jobs.css";
 const Jobs = () => {
   return (
     <div className="jobs-portal">
-      <nav id="nav" >
-        <ul id="ul">
-          <li id="li">
+      <nav  >
+        <ul className="text-decoration-none d-flex justify-content-center list-inline font-weight-bold fs-4 mb-2" >
+          <li >
             <Link
             id="link"
-              className="nav-link  "
+              className="nav-link mx-2 "
               style={{ padding: "1.3rem" }}
               to="/jobs/public"
             >
               Public Sector
             </Link>
           </li>
-          <li id="li">
+          <li >
             <Link
             id="link"
-              className="nav-link  "
+              className="nav-link mx-2 "
               style={{ padding: "1.3rem" }}
               to="/jobs/private"
             >
@@ -29,8 +29,9 @@ const Jobs = () => {
           </li>
         </ul>
       </nav>
+      <hr className="font-weight-bolder fs-4 w-75 d-block m-auto  " style={{height:"4px",color:"black"}}></hr>
 
-      <div className="jobs-list">
+      <div className="jobs-list mt-3">
         <Outlet />
       </div>
     </div>

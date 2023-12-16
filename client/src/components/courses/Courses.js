@@ -6,7 +6,7 @@ import { useState } from 'react';
 const Courses = () => {
   let navigate = useNavigate();
   const goToUpsc=()=>{
-    navigate('/upsc')
+    navigate('/upsc/UPSC-IAS-Foundation')
   }
   
   const goToRailway=()=>{
