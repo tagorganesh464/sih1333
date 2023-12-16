@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext,useEffect } from "react";
+import { loginContext } from "../../context/loginContext";
 import { imgDB } from "../config/firebase.config";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -14,7 +15,7 @@ const Public = () => {
 
   const [data, setData] = useState([]);
 
-  let [error, setError] = useState("");
+  let [errorr, setError] = useState("");
   let {
     register,
     handleSubmit,
@@ -178,6 +179,8 @@ const Public = () => {
   useEffect(() => {
     getJobs();
   }, []);
+  let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
+  useContext(loginContext);
   return (
     <div className="container">
       <div className="tab-content">
@@ -249,6 +252,7 @@ const Public = () => {
       </div>
 
       {/* input for jobs */}
+      {userLoginStatus && role==="admin" && 
       <div className="container spider-man mb-4 w-50 px-5" py-3>
         <form onSubmit={handleSubmit(formSubmit)} action="" className="mt-5">
           <div className="inputbox2 form-floating">
@@ -372,7 +376,7 @@ const Public = () => {
             Update
           </button>
         </form>
-      </div>
+      </div>}
     </div>
   );
 };
