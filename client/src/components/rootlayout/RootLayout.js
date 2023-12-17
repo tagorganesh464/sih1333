@@ -18,12 +18,14 @@ function RootLayout() {
   };
   const getStyles = () => {
     switch (selectedColor) {
-      case "blue":
-        return { backgroundColor: "blue", color: "white" };
-      case "red":
-        return { backgroundColor: "red", color: "white" };
-      case "green":
-        return { backgroundColor: "green", color: "white" };
+      case "#AA9403":
+        return { backgroundColor: "#AA9403", color: "white" };
+      case "#E50203":
+        return { backgroundColor: "#E50203", color: "white" };
+      case "#FF005B":
+        return { backgroundColor: "#FF005B", color: "white" };
+      case "#FEED00":
+        return { backgroundColor: "#FEED00", color: "black" };
       default:
         // Set a transparent color for the default state
         return { backgroundColor: "rgba(0, 0, 0, 0)", color: "black" };
@@ -63,13 +65,23 @@ function RootLayout() {
       <div className="body-main">
         <div
           className="head"
-          style={{ ...getStyles(), fontSize: `${fontSize}px` }}
+          style={{
+            ...getStyles(),
+            fontSize: `${fontSize}px`,
+            zIndex: "2",
+            position: "relative",
+          }}
         >
-          <NavbarMain />
-
+          <NavbarMain
          
+            increaseFontSize={increaseFontSize}
+            decreaseFontSize={decreaseFontSize}
+            getStyles={getStyles}
+            resetColor={resetColor}
+            changeColor={changeColor}
+          />
         </div>
-        <div className="d-flex align-items-end flex-column bd-highlight mx-4   ">
+        {/* <div className="d-flex align-items-end flex-column bd-highlight mx-4   ">
 
 <button onClick={increaseFontSize} className="btn-success p-3 text-center">A+</button>
 <button onClick={decreaseFontSize}className="btn-primary p-3">A-</button>
@@ -93,12 +105,17 @@ function RootLayout() {
               style={{ backgroundColor: "blue" }}
               onClick={() => changeColor("blue")}
             ></button>
-          </div>
-       
+          </div> */}
+
         {/* placeholder */}
         <div
-          className="main  "
-          style={{ ...getStyles(), fontSize: `${fontSize}px` }}
+          className="main pt-5 "
+          style={{
+            ...getStyles(),
+            fontSize: `${fontSize}px`,
+            zIndex: " 1",
+            position: "relative",
+          }}
         >
           <Outlet />
         </div>
