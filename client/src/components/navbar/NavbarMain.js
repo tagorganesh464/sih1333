@@ -63,12 +63,12 @@ function NavbarMain(props) {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-              <button onClick={props.increaseFontSize} className="btn d-block m-auto w-100 fs-4 text-dark">   +A</button>
+              <button onClick={props.increaseFontSize} className="btn d-block m-auto w-100 fs-5 text-dark">   +A</button>
                    
                 
                 
                 <Dropdown.Divider />
-                <button onClick={props.decreaseFontSize} className="btn d-block m-auto w-100 fs-4 text-dark">   -A</button>
+                <button onClick={props.decreaseFontSize} className="btn d-block m-auto w-100 fs-5 text-dark">   -A</button>
                 <Dropdown.Divider />
                 <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#E50203" }}
                     onClick={() => props.changeColor("#E50203")}>
