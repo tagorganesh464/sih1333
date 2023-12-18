@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from "react";
+
 import { loginContext } from "../../context/loginContext";
 import { imgDB } from "../config/firebase.config";
 import { v4 } from "uuid";
@@ -6,10 +6,13 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import "./Public.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import ProgressBar from 'react-bootstrap/ProgressBar'; 
+import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
 import { MdOutlineEventSeat } from "react-icons/md";
-import styled from 'styled-components';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+
+const RatingContext = createContext();
 
 const StyledPost = styled.div`
   display: flex;
@@ -25,7 +28,7 @@ const StyledRatingContainer = styled.div`
 const StyledRating = styled.div`
   display: flex;
   align-items: center;
-  cursor: default;
+  cursor: pointer;
 
   &:not(:last-child) {
     margin-right: 12px;
@@ -73,14 +76,14 @@ const Public = () => {
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return; // Handle if no file is selected
-    console.log(e)
+    console.log(e);
     // Replace with your Firebase storage reference
-   
+
     const imgs = ref(imgDB, `Imgs/${v4()}`);
     const uploadTask = uploadBytesResumable(imgs, file);
 
     // Listen to the upload progress
-    uploadTask.on('state_changed', (snapshot) => {
+    uploadTask.on("state_changed", (snapshot) => {
       // Calculate progress percentage
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setUploadProgress(progress);
@@ -92,7 +95,7 @@ const Public = () => {
 
       // Retrieve the download URL
       const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-      console.log(downloadURL)
+      console.log(downloadURL);
       // Update your state or perform other actions
       setFormData({
         ...formData,
@@ -100,7 +103,7 @@ const Public = () => {
       });
     } catch (error) {
       // Handle errors
-      console.error('Error uploading image:', error);
+      console.error("Error uploading image:", error);
     }
   };
   const handleChange = (event) => {
@@ -110,7 +113,7 @@ const Public = () => {
     });
   };
   const handleDateChange = (e) => {
-    const reversedDate = e.target.value.split('-').reverse().join('-');
+    const reversedDate = e.target.value.split("-").reverse().join("-");
     setFormData({
       ...formData,
       [e.target.name]: reversedDate,
@@ -150,62 +153,16 @@ const Public = () => {
       });
     reset();
   };
+
+
+  const [selectedRating, setSelectedRating] = useState(null);
+
   useEffect(() => {
-    const handleRatingClick = async (postId, type) => {
-      // Assuming you have an API endpoint for handling likes and dislikes
-      const response = await fetch(`/posts/${postId}/${type}`);
-      const body = await response.json();
-
-      // Update state or perform other actions based on the response
-
-      // For simplicity, just log the response body for now
-      console.log(body);
+    // Remove stored rating when component unmounts
+    return () => {
+      localStorage.removeItem("selectedRating");
     };
-
-    const posts = document.querySelectorAll(".post");
-
-    posts.forEach((post) => {
-      const postId = post.dataset.postId;
-      const ratings = post.querySelectorAll(".post-rating");
-      const likeRating = ratings[0];
-
-      ratings.forEach((rating) => {
-        const button = rating.querySelector(".post-rating-button");
-        const count = rating.querySelector(".post-rating-count");
-
-        button.addEventListener("click", async () => {
-          if (rating.classList.contains("post-rating-selected")) {
-            return;
-          }
-
-          count.textContent = Number(count.textContent) + 1;
-
-          ratings.forEach((r) => {
-            if (r.classList.contains("post-rating-selected")) {
-              const count = r.querySelector(".post-rating-count");
-
-              count.textContent = Math.max(0, Number(count.textContent) - 1);
-              r.classList.remove("post-rating-selected");
-            }
-          });
-
-          rating.classList.add("post-rating-selected");
-
-          const likeOrDislike = likeRating === rating ? "like" : "dislike";
-          handleRatingClick(postId, likeOrDislike);
-        });
-      });
-
-      return () => {
-        // Cleanup: Remove event listeners when the component unmounts
-        ratings.forEach((rating) => {
-          const button = rating.querySelector(".post-rating-button");
-          button.removeEventListener("click", handleRatingClick);
-        });
-      };
-    });
   }, []);
- 
 
   const getJobs = () => {
     axios
@@ -233,7 +190,7 @@ const Public = () => {
     getJobs();
   }, []);
   let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
-  useContext(loginContext);
+    useContext(loginContext);
   return (
     <div className="container">
       <div className="tab-content">
@@ -254,7 +211,9 @@ const Public = () => {
                       style={{ width: "80px", height: "80px" }}
                     />
                     <div className="text-start ps-4">
-                      <h3 className="mb-3 font-weight-bold">{job.organisation}</h3>
+                      <h3 className="mb-3 font-weight-bold">
+                        {job.organisation}
+                      </h3>
                       <p className="lead">{job.post}</p>
                       {/* <span className="text-truncate me-3">
               <i className="fa fa-map-marker-alt text-primary me-2"></i>New York, USA
@@ -265,28 +224,23 @@ const Public = () => {
                       </span>
                       <span className="text-truncate me-3">
                         {/* <i className="far fa-money-bill-alt text-primary me-2"></i> */}
-                        <MdOutlineEventSeat className="me-2" />{job.reservation}% Reservation 
-                        
+                        <MdOutlineEventSeat className="me-2" />
+                        {job.reservation}% Reservation
                       </span>
                     </div>
                   </div>
                   <div className="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                     <div className="d-flex mb-3">
-                    <StyledPost className="post" data-post-id="7712">
-     
-      <StyledRatingContainer className="post-ratings-container">
-        <StyledRating className="post-rating">
-          <StyledRatingButton className="post-rating-button material-icons">thumb_up</StyledRatingButton>
-          <span className="post-rating-count">0</span>
-        </StyledRating>
-        <StyledRating className="post-rating">
-          <StyledRatingButton className="post-rating-button material-icons">thumb_down</StyledRatingButton>
-          <span className="post-rating-count">0</span>
-        </StyledRating>
-      </StyledRatingContainer>
-    </StyledPost>
+                    <RatingContext.Provider value={{ selectedRating, setSelectedRating }}>
+      <StyledPost className="post" data-post-id="7712">
+        <StyledRatingContainer className="post-ratings-container">
+          <RatingButton icon="thumb_up" />
+          <RatingButton icon="thumb_down" />
+        </StyledRatingContainer>
+      </StyledPost>
+    </RatingContext.Provider>
                       <a className="btn btn-success mx-2" href={job.link}>
-                        Apply Now
+                        Get Details
                       </a>
                     </div>
                     <small className="text-truncate">
@@ -302,132 +256,163 @@ const Public = () => {
       </div>
 
       {/* input for jobs */}
-      {userLoginStatus && role==="admin" && 
-      <div className="container spider-man mb-4 w-50 px-5" py-3>
-        <form onSubmit={handleSubmit(formSubmit)} action="" className="mt-5">
-          <div className="inputbox2 form-floating">
-            <div className="input-group">
-              <div className="custom-file w-75">
-                <label className="custom-file-label" htmlFor="inputGroupFile">
-                  Choose file for image uploading
-                </label>
-                <input
-                  type="file"
-                  className="custom-file-input"
-                  name="img"
-                  id="inputGroupFile"
-                  onChange={(e) => handleUpload(e)}
-                />
-                {uploadProgress > 0 && uploadProgress < 100 && (
-                  <div className="progress-container">
-                    <ProgressBar
-                      now={uploadProgress}
-                      label={`${uploadProgress.toFixed(2)}%`}
-                    />
-                  </div>
-                )}
+      {userLoginStatus && role === "admin" && (
+        <div className="container spider-man mb-4 w-50 px-5" py-3>
+          <form onSubmit={handleSubmit(formSubmit)} action="" className="mt-5">
+            <div className="inputbox2 form-floating">
+              <div className="input-group">
+                <div className="custom-file w-75">
+                  <label className="custom-file-label" htmlFor="inputGroupFile">
+                    Choose file for image uploading
+                  </label>
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    name="img"
+                    id="inputGroupFile"
+                    onChange={(e) => handleUpload(e)}
+                  />
+                  {uploadProgress > 0 && uploadProgress < 100 && (
+                    <div className="progress-container">
+                      <ProgressBar
+                        now={uploadProgress}
+                        label={`${uploadProgress.toFixed(2)}%`}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
-             
             </div>
-          </div>
-          <div className="inputbox2 form-floating">
-            <i className="fa-solid fa-sitemap"></i>
-            <input
-              type="text"
-              id="organisation"
-              name="organisation"
-              className="form-control "
-              placeholder="xyz"
-              value={formData.organisation}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="organisation" className="text-dark">
-              Organisation
-            </label>
-          </div>
+            <div className="inputbox2 form-floating">
+              <i className="fa-solid fa-sitemap"></i>
+              <input
+                type="text"
+                id="organisation"
+                name="organisation"
+                className="form-control "
+                placeholder="xyz"
+                value={formData.organisation}
+                onChange={handleChange}
+              ></input>
+              <label htmlFor="organisation" className="text-dark">
+                Organisation
+              </label>
+            </div>
 
-          <div className="inputbox2 form-floating">
-            <i className="fa-solid fa-signs-post"></i>
-            <input
-              type="text"
-              id="post"
-              name="post"
-              className="form-control "
-              value={formData.post}
-              onChange={handleChange}
-              placeholder="xyz"
-            ></input>
-            <label htmlFor="post" className="text-dark">
-              post
-            </label>
-          </div>
-          <div className="inputbox2 form-floating">
-            <i className="fa-solid fa-calendar-check"></i>
-            <input
-              type="text"
-              id="method"
-              className="form-control "
-              placeholder="xyz"
-              name="method"
-              value={formData.method}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="method" className="text-dark">
-              Method Of Appointment
-            </label>
-          </div>
-          <div className="inputbox2 form-floating">
-            <i className="fa-solid fa-calendar-days"></i>
-            <input
-              type="date"
-              id="lastDate"
-              className="form-control "
-              placeholder="xyz"
-              name="lastDate"
-              value={formData.lastDate}
-              onChange={handleDateChange}
-            ></input>
-            <label htmlFor="lastDate" className="text-dark">
-              Last Date
-            </label>
-          </div>
-          <div className="inputbox2 form-floating">
-            <i className="fa-solid fa-percent"></i>
-            <input
-              type="number"
-              id="reservation"
-              className="form-control "
-              placeholder="xyz"
-              name="reservation"
-              value={formData.reservation}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="reservation" className="text-dark">
-              Reservation
-            </label>
-          </div>
-          <div className="inputbox2 form-floating">
-            <i className="fa-solid fa-link"></i>
-            <input
-              type="text"
-              id="link"
-              className="form-control "
-              placeholder="xyz"
-              name="link"
-              value={formData.link}
-              onChange={handleChange}
-            ></input>
-            <label htmlFor="link" className="text-dark">
-              Apply Link
-            </label>
-          </div>
+            <div className="inputbox2 form-floating">
+              <i className="fa-solid fa-signs-post"></i>
+              <input
+                type="text"
+                id="post"
+                name="post"
+                className="form-control "
+                value={formData.post}
+                onChange={handleChange}
+                placeholder="xyz"
+              ></input>
+              <label htmlFor="post" className="text-dark">
+                post
+              </label>
+            </div>
+            <div className="inputbox2 form-floating">
+              <i className="fa-solid fa-calendar-check"></i>
+              <input
+                type="text"
+                id="method"
+                className="form-control "
+                placeholder="xyz"
+                name="method"
+                value={formData.method}
+                onChange={handleChange}
+              ></input>
+              <label htmlFor="method" className="text-dark">
+                Method Of Appointment
+              </label>
+            </div>
+            <div className="inputbox2 form-floating">
+              <i className="fa-solid fa-calendar-days"></i>
+              <input
+                type="date"
+                id="lastDate"
+                className="form-control "
+                placeholder="xyz"
+                name="lastDate"
+                value={formData.lastDate}
+                onChange={handleDateChange}
+              ></input>
+              <label htmlFor="lastDate" className="text-dark">
+                Last Date
+              </label>
+            </div>
+            <div className="inputbox2 form-floating">
+              <i className="fa-solid fa-percent"></i>
+              <input
+                type="number"
+                id="reservation"
+                className="form-control "
+                placeholder="xyz"
+                name="reservation"
+                value={formData.reservation}
+                onChange={handleChange}
+              ></input>
+              <label htmlFor="reservation" className="text-dark">
+                Reservation
+              </label>
+            </div>
+            <div className="inputbox2 form-floating">
+              <i className="fa-solid fa-link"></i>
+              <input
+                type="text"
+                id="link"
+                className="form-control "
+                placeholder="xyz"
+                name="link"
+                value={formData.link}
+                onChange={handleChange}
+              ></input>
+              <label htmlFor="link" className="text-dark">
+                Details Doc Link
+              </label>
+            </div>
 
-          <button type="submit" className="btn btn-primary d-block m-auto my-4">
-            Update
-          </button>
-        </form>
-      </div>}
+            <button
+              type="submit"
+              className="btn btn-primary d-block m-auto my-4"
+            >
+              Update
+            </button>
+          </form>
+        </div>
+      )}
     </div>
+  );
+};
+
+const RatingButton = ({ icon }) => {
+  const { selectedRating, setSelectedRating } = useContext(RatingContext);
+
+  const handleRatingClick = async () => {
+    if (selectedRating === icon) {
+      return;
+    }
+
+    setSelectedRating(icon);
+
+    const postId = document.querySelector(".post").dataset.postId;
+    const likeOrDislike = icon === "thumb_up" ? "like" : "dislike";
+    // Your API call logic goes here
+    // const response = await fetch(`/posts/${postId}/${likeOrDislike}`);
+    // const body = await response.json();
+    // console.log(body);
+  };
+
+  return (
+    <StyledRating className={`post-rating ${selectedRating === icon ? "post-rating-selected" : ""}`}>
+      <StyledRatingButton className="post-rating-button material-icons" onClick={handleRatingClick}>
+        {icon}
+      </StyledRatingButton>
+     
+    </StyledRating>
   );
 };
 

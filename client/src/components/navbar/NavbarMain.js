@@ -172,7 +172,22 @@ function NavbarMain(props) {
                     </Link>
                   </li>
                 </ul>
-              )}
+              )} {userLoginStatus && role == "admin" &&
+                <ul className="navbar-nav menu ms-auto text-decoration-none">
+                   
+                 
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link "
+                      style={{ padding: "1.3rem" }}
+                      to="/users"
+                    >
+                      Employees
+                    </Link>
+                  </li>
+                
+                </ul>
+}
 
               <li className="nav-item active">
                 {/* <div id="google_translate_element"></div> */}
