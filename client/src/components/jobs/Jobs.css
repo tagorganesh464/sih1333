@@ -1,10 +1,10 @@
-#link {
+#iron-man {
 	color: #18272F;
   position: relative;
   text-decoration: none;
 }
 
-#link::before {
+#iron-man::before {
   content: '';
   position: absolute;
   width: 100%;
@@ -18,7 +18,7 @@
   transition: transform .7s ease-in-out;
 }
 
-#link:hover::before {
+#iron-man:hover::before {
   transform-origin: left;
   transform: scaleX(1);
 }

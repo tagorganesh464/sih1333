@@ -9,7 +9,7 @@ const Jobs = () => {
         <ul className="text-decoration-none d-flex justify-content-center list-inline font-weight-bold fs-4 mb-2" >
           <li >
             <Link
-            id="link"
+            id="iron-man"
               className="nav-link mx-2 "
               style={{ padding: "1.3rem" }}
               to="/jobs/public"
@@ -19,7 +19,7 @@ const Jobs = () => {
           </li>
           <li >
             <Link
-            id="link"
+            id="iron-man"
               className="nav-link mx-2 "
               style={{ padding: "1.3rem" }}
               to="/jobs/private"

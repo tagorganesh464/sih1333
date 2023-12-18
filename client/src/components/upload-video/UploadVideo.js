@@ -50,6 +50,7 @@ const UploadVideo = () => {
   };
 
   const handleClick = () => {
+    
     if (file === null) return;
     const fileRef = ref(storage, `videos/${file.name}`);
     const uploadTask = uploadBytesResumable(fileRef, file);

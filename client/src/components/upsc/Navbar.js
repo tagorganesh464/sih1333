@@ -13,16 +13,16 @@ function Navbar() {
 
   return (
     <>
-      <IconContext.Provider value={{ color: 'black' }} >
+      <IconContext.Provider value={{ color: 'black' }}  >
         <div className='navbar-u '>
-          <Link to='#' className='menu-bars-u'>
-            <FaIcons.FaBars onClick={showSidebar} />
+          <Link to='#' className='text-decoration-none' id="menu-bars-u" onClick={showSidebar} >
+            <FaIcons.FaBars /> All Courses
           </Link>
         </div>
         <nav className={sidebar ? 'nav-menu-u active' : 'nav-menu-u'}>
           <ul className='nav-menu-u-items p-0' onClick={showSidebar}>
             <li className='navbar-u-toggle'>
-              <Link to='#' className='menu-bars-u'>
+              <Link to='#' className='menu-bars-close'>
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>

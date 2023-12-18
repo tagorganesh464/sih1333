@@ -6,7 +6,12 @@
   align-items: center;
 }
 
-.menu-bars-u {
+#menu-bars-u {
+  margin-left: 2rem;
+  
+  background: none;
+}
+.menu-bars-close {
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
@@ -92,4 +97,15 @@ background-color:black;
 
 .span-u {
   margin-left: 16px;
+}
+#menu-bars-u{
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 1rem );
+  -webkit-backdrop-filter: blur( 1rem );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

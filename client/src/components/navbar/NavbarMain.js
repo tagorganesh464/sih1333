@@ -6,7 +6,7 @@ import { loginContext } from "../../context/loginContext";
 import "./NavbarMain.css";
 import { Link } from "react-router-dom";
 function NavbarMain(props) {
-  console.log(props)
+ 
   let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
     useContext(loginContext);
 
@@ -70,10 +70,7 @@ function NavbarMain(props) {
                 <Dropdown.Divider />
                 <button onClick={props.decreaseFontSize} className="btn d-block m-auto w-100 fs-5 text-dark">   -A</button>
                 <Dropdown.Divider />
-                <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#E50203" }}
-                    onClick={() => props.changeColor("#E50203")}>
-                  
-                </Dropdown.Item>
+                
                 <Dropdown.Divider />
                 <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#E50203" }}
                     onClick={() => props.changeColor("#E50203")}>

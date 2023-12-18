@@ -9,7 +9,43 @@ import { useForm } from "react-hook-form";
 import ProgressBar from 'react-bootstrap/ProgressBar'; 
 import axios from "axios";
 import { MdOutlineEventSeat } from "react-icons/md";
+import styled from 'styled-components';
 
+const StyledPost = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+`;
+
+const StyledRatingContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledRating = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: default;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &.post-rating-selected > .post-rating-button,
+  &.post-rating-selected > .post-rating-count {
+    color: #009578;
+  }
+`;
+
+const StyledRatingButton = styled.span`
+  margin-right: 6px;
+  cursor: pointer;
+  color: #555555;
+
+  &:not(.post-rating-selected):hover {
+    color: #000000;
+  }
+`;
 const Public = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -114,8 +150,18 @@ const Public = () => {
       });
     reset();
   };
-
   useEffect(() => {
+    const handleRatingClick = async (postId, type) => {
+      // Assuming you have an API endpoint for handling likes and dislikes
+      const response = await fetch(`/posts/${postId}/${type}`);
+      const body = await response.json();
+
+      // Update state or perform other actions based on the response
+
+      // For simplicity, just log the response body for now
+      console.log(body);
+    };
+
     const posts = document.querySelectorAll(".post");
 
     posts.forEach((post) => {
@@ -134,22 +180,29 @@ const Public = () => {
 
           count.textContent = Number(count.textContent) + 1;
 
-          ratings.forEach((rating) => {
-            if (rating.classList.contains("post-rating-selected")) {
-              const count = rating.querySelector(".post-rating-count");
+          ratings.forEach((r) => {
+            if (r.classList.contains("post-rating-selected")) {
+              const count = r.querySelector(".post-rating-count");
 
               count.textContent = Math.max(0, Number(count.textContent) - 1);
-              rating.classList.remove("post-rating-selected");
+              r.classList.remove("post-rating-selected");
             }
           });
 
           rating.classList.add("post-rating-selected");
 
           const likeOrDislike = likeRating === rating ? "like" : "dislike";
-          const response = await fetch(`/posts/${postId}/${likeOrDislike}`);
-          const body = await response.json();
+          handleRatingClick(postId, likeOrDislike);
         });
       });
+
+      return () => {
+        // Cleanup: Remove event listeners when the component unmounts
+        ratings.forEach((rating) => {
+          const button = rating.querySelector(".post-rating-button");
+          button.removeEventListener("click", handleRatingClick);
+        });
+      };
     });
   }, []);
  
@@ -219,22 +272,19 @@ const Public = () => {
                   </div>
                   <div className="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                     <div className="d-flex mb-3">
-                      <div class="post" data-post-id="7712">
-                        <div className="post-ratings-container">
-                          <div className="post-rating">
-                            <span className="post-rating-button material-icons">
-                              thumb_up
-                            </span>
-                            <span className="post-rating-count">0</span>
-                          </div>
-                          <div className="post-rating">
-                            <span className="post-rating-button material-icons">
-                              thumb_down
-                            </span>
-                            <span className="post-rating-count">0</span>
-                          </div>
-                        </div>
-                      </div>
+                    <StyledPost className="post" data-post-id="7712">
+     
+      <StyledRatingContainer className="post-ratings-container">
+        <StyledRating className="post-rating">
+          <StyledRatingButton className="post-rating-button material-icons">thumb_up</StyledRatingButton>
+          <span className="post-rating-count">0</span>
+        </StyledRating>
+        <StyledRating className="post-rating">
+          <StyledRatingButton className="post-rating-button material-icons">thumb_down</StyledRatingButton>
+          <span className="post-rating-count">0</span>
+        </StyledRating>
+      </StyledRatingContainer>
+    </StyledPost>
                       <a className="btn btn-success mx-2" href={job.link}>
                         Apply Now
                       </a>

@@ -18,6 +18,7 @@ import Railway from "./components/railway/Railway";
 import SoftwareDevelopment from "./components/software-development/SoftwareDevelopment";
 import UpscIasFoundation from "./components/upsc-ias-foundation/UpscIasFoundation";
 import Law from "./components/law/Law";
+import About from "./components/about/About"
 // import EmpProfile from "./components/empprofile/EmpProfile";
 
 
@@ -94,6 +95,10 @@ function App() {
         },{
           path: "/software-development",
           element: <SoftwareDevelopment />,
+        },
+        {
+          path: "/about",
+          element: <About />,
         },
 
 
