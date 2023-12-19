@@ -4,7 +4,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { loginContext } from "../../context/loginContext";
 import "./NavbarMain.css";
+import { FaWheelchair, FaHome, FaSignInAlt, FaSignOutAlt, FaUser, FaFileAlt, FaBookReader,FaVolumeUp } from 'react-icons/fa';
+import { GiSpeaker } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { RiUserSearchFill } from "react-icons/ri";
+import { FaUsers } from "react-icons/fa6";
 function NavbarMain(props) {
   let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
     useContext(loginContext);
@@ -147,7 +151,7 @@ function NavbarMain(props) {
                         border: "none",
                         background: "none",
                       }}
-                    >
+                    ><GiSpeaker />
                       Screen reader access
                     </button>
                   </li>
@@ -156,7 +160,7 @@ function NavbarMain(props) {
                       className="nav-link  "
                       style={{ padding: "1.3rem" }}
                       to="/"
-                    >
+                    ><FaHome /> 
                       Home
                     </Link>
                   </li>
@@ -165,7 +169,7 @@ function NavbarMain(props) {
                       className="nav-link   "
                       style={{ padding: "1.3rem" }}
                       to="/login"
-                    >
+                    ><FaSignInAlt /> 
                       Sign in
                     </Link>
                   </li>
@@ -174,7 +178,7 @@ function NavbarMain(props) {
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/register"
-                    >
+                    ><FaSignOutAlt /> 
                       Sign up
                     </Link>
                   </li>
@@ -190,7 +194,7 @@ function NavbarMain(props) {
                         border: "none",
                         background: "none",
                       }}
-                    >
+                    ><GiSpeaker />
                       Screen reader access
                     </button>
                   </li>
@@ -199,7 +203,7 @@ function NavbarMain(props) {
                       className="nav-link  "
                       style={{ padding: "1.3rem" }}
                       to="/"
-                    >
+                    ><FaHome /> 
                       Home
                     </Link>
                   </li>
@@ -209,7 +213,7 @@ function NavbarMain(props) {
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/jobs/public"
-                    >
+                    ><FaFileAlt />
                       Jobs
                     </Link>
                   </li>
@@ -218,7 +222,7 @@ function NavbarMain(props) {
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/coursespage"
-                    >
+                    ><FaBookReader /> 
                       Courses
                     </Link>
                   </li>
@@ -227,7 +231,7 @@ function NavbarMain(props) {
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/mockTestCard"
-                    >
+                    ><FaFileAlt /> 
                       Tests
                     </Link>
                   </li>
@@ -242,7 +246,7 @@ function NavbarMain(props) {
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/users"
-                    >
+                    ><FaUsers />
                       Users
                     </Link>
                   </li>
@@ -252,7 +256,7 @@ function NavbarMain(props) {
                       style={{ padding: "1.3rem" }}
                       to="/login"
                       onClick={logoutUser}
-                    >
+                    ><FaSignOutAlt />
                       Sign Out
                     </Link>
                   </li>
@@ -265,7 +269,7 @@ function NavbarMain(props) {
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/user-profile"
-                    >
+                    ><RiUserSearchFill />
                       User Profile
                     </Link>
                   </li>
@@ -275,7 +279,7 @@ function NavbarMain(props) {
                       style={{ padding: "1.3rem" }}
                       to="/login"
                       onClick={logoutUser}
-                    >
+                    ><FaSignOutAlt />
                       Sign Out
                     </Link>
                   </li>

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./App.css";
 import Register from "./components/register/Register";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -22,11 +22,17 @@ import About from "./components/about/About"
 import CoursesPage from "./components/coursesPage/CoursesPage";
 import MockTestCard from "./components/mockTestCard/MockTestCard";
 import Users from "./components/users/Users"
-
+import Forgot from "./components/forgot/Forgot";
 import UserProfile from "./components/userprofile/UserProfile";
-
+import OTPInput from "./components/otpInput/OTPInput";
+import Recovered from "./components/recovered/Recovered";
+import Reset from "./components/reset/Reset";
+import { createContext } from "react";
 
 function App() {
+  const [page, setPage] = useState("login");
+  const [email, setEmail] = useState();
+  const [otp, setOTP] = useState();
   const routerObj = createBrowserRouter([
     {
       path: "/",
@@ -123,6 +129,10 @@ function App() {
         {
           path: "/coursespage",
           element: <CoursesPage/>,
+        },
+        {
+          path: "/forgot",
+          element: <Forgot/>,
         },
        
 

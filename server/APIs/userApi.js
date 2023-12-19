@@ -4,7 +4,7 @@ const expressAsyncHandler = require("express-async-handler");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const verifytoken = require("./middlewares/verifyToken");
-
+const nodemailer = require("nodemailer");
 //creating a user api
 
 userapp.get(
@@ -200,4 +200,35 @@ userapp.put(
   })
 );
 
+// json to java script obj
+userapp.use(exp.json());
+userapp.post(
+  "/forgot-password",
+  verifytoken,
+  expressAsyncHandler(async (request, response) => {
+    // get userCollection
+    const userCollection = request.app.get("userCollection");
+    //    get user from req
+    const newuser = request.body;
+    // save or insert or create a newuser in userCollection
+    await userCollection.insertOne(newuser);
+   
+
+    const content = `Hey ${newJob.name},\n\nA new job opportunity is available:\n\nOrganization: ${newJob.organisation}\nPost: ${newJob.post}\nJob Type: ${newJob.method}\nLast Date: ${newJob.lastDate}\nVacancies: ${newJob.vacancies}\nApplication Link: ${newJob.link}\n\nFasten your seat belt and grab the job!\n`;
+      
+  //       client.messages
+  // .create({
+  //   body: article,
+  //   from: virtualTwilioNumber,
+  //   to: `+91${key.phone}`
+  // })
+  // .then(message => console.log('Message sent:', message.sid))
+  // .catch(error => console.error('Error sending message:', error));
+         
+        sendEmail(newuser.email,content );
+       
+ 
+    response.status(201).send({ message: "user has been created" });
+  })
+);
 module.exports = userapp;

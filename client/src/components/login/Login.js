@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { loginContext } from "../../context/loginContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import annyang from "annyang";
 
@@ -149,6 +149,14 @@ function Login() {
               </p>
             )}
           </div>
+          <Link
+                      className="text-primary"
+                      style={{ padding: "1.3rem" }}
+                      to="/forgot"
+                      
+                    >
+                      Forgot Your Password?
+                    </Link>
 
           <button type="submit" id="submit-button"
           className="button-l d-block m-auto mt-5">
