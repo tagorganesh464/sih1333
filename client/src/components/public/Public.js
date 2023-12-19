@@ -50,6 +50,8 @@ const StyledRatingButton = styled.span`
   }
 `;
 const Public = () => {
+  let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
+  useContext(loginContext);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const [data, setData] = useState([]);
@@ -69,14 +71,15 @@ const Public = () => {
     post: "",
     method: "",
     lastDate: "",
-    reservation: "",
+    vacancies: "",
     link: "",
     role: "public",
+    
   });
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return; // Handle if no file is selected
-    console.log(e);
+  
     // Replace with your Firebase storage reference
 
     const imgs = ref(imgDB, `Imgs/${v4()}`);
@@ -112,25 +115,21 @@ const Public = () => {
       [event.target.name]: event.target.value,
     });
   };
-  const handleDateChange = (e) => {
-    const reversedDate = e.target.value.split("-").reverse().join("-");
-    setFormData({
-      ...formData,
-      [e.target.name]: reversedDate,
-    });
-  };
+
   const modifiedFormData = {
     img: formData.img,
     organisation: formData.organisation,
     post: formData.post,
     method: formData.method,
     lastDate: formData.lastDate,
-    reservation: formData.reservation,
+    vacancies: formData.vacancies,
     link: formData.link,
     role: formData.role,
+    
   };
 
   let formSubmit = (newUser) => {
+
     axios
       .post(`/job-api/add-job`, modifiedFormData)
       .then((response) => {
@@ -189,10 +188,10 @@ const Public = () => {
   useEffect(() => {
     getJobs();
   }, []);
-  let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
-    useContext(loginContext);
+ 
   return (
     <div className="container">
+      {}
       <div className="tab-content">
         <div id="tab-1" className="tab-pane fade show p-0 active">
           {/* job apply cards */}
@@ -225,7 +224,7 @@ const Public = () => {
                       <span className="text-truncate me-3">
                         {/* <i className="far fa-money-bill-alt text-primary me-2"></i> */}
                         <MdOutlineEventSeat className="me-2" />
-                        {job.reservation}% Reservation
+                        {job.vacancies} Vacancies
                       </span>
                     </div>
                   </div>
@@ -245,7 +244,7 @@ const Public = () => {
                     </div>
                     <small className="text-truncate">
                       <i className="far fa-calendar-alt text-primary me-2"></i>
-                      Last Date: {job.lastDate}
+                      Last Date: {job.lastDate.split("-").reverse().join("-")}
                     </small>
                   </div>
                 </div>
@@ -326,7 +325,7 @@ const Public = () => {
                 onChange={handleChange}
               ></input>
               <label htmlFor="method" className="text-dark">
-                Method Of Appointment
+               Job type
               </label>
             </div>
             <div className="inputbox2 form-floating">
@@ -338,7 +337,7 @@ const Public = () => {
                 placeholder="xyz"
                 name="lastDate"
                 value={formData.lastDate}
-                onChange={handleDateChange}
+                onChange={handleChange}
               ></input>
               <label htmlFor="lastDate" className="text-dark">
                 Last Date
@@ -348,15 +347,15 @@ const Public = () => {
               <i className="fa-solid fa-percent"></i>
               <input
                 type="number"
-                id="reservation"
+                id="vacancies"
                 className="form-control "
                 placeholder="xyz"
-                name="reservation"
-                value={formData.reservation}
+                name="vacancies"
+                value={formData.vacancies}
                 onChange={handleChange}
               ></input>
-              <label htmlFor="reservation" className="text-dark">
-                Reservation
+              <label htmlFor="vacancies" className="text-dark">
+                Vacancies
               </label>
             </div>
             <div className="inputbox2 form-floating">

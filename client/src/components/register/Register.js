@@ -17,7 +17,8 @@ const Register = () => {
   const navigate = useNavigate();
 
   let formSubmit = (newUser) => {
-    newUser = { ...newUser, role: "customer", tasks: [] };
+    newUser = { ...newUser,middlename:newUser.middlename|| "", role: "employee", tasks: [] };
+
     axios
       .post(`/user-api/register-user`, newUser)
       .then((response) => {
@@ -85,17 +86,11 @@ const Register = () => {
                     id="middlename"
                     className="form-control "
                     placeholder="xyz"
-                    {...register("middlename", {
-                      required: true,
-                    })}
+                    {...register("middlename")}
                   ></input>
                   <label htmlFor="middlename" className="text-dark">
                     Middle Name
                   </label>
-
-                  {errors.middlename?.type === "required" && (
-                    <p className=" text-danger">*enter your middle name</p>
-                  )}
                 </div>
                 {/*  last name*/}
                 <div className="inputbox1 form-floating">

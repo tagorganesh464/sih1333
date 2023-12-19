@@ -182,7 +182,7 @@ function NavbarMain(props) {
                       style={{ padding: "1.3rem" }}
                       to="/users"
                     >
-                      Employees
+                     Users
                     </Link>
                   </li>
                 

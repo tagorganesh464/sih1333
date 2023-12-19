@@ -19,6 +19,7 @@ import SoftwareDevelopment from "./components/software-development/SoftwareDevel
 import UpscIasFoundation from "./components/upsc-ias-foundation/UpscIasFoundation";
 import Law from "./components/law/Law";
 import About from "./components/about/About"
+import Users from "./components/users/Users"
 // import EmpProfile from "./components/empprofile/EmpProfile";
 
 
@@ -100,6 +101,11 @@ function App() {
           path: "/about",
           element: <About />,
         },
+        {
+          path: "/users",
+          element: <Users />,
+        },
+       
 
 
       ],
