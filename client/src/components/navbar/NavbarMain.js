@@ -6,7 +6,6 @@ import { loginContext } from "../../context/loginContext";
 import "./NavbarMain.css";
 import { Link } from "react-router-dom";
 function NavbarMain(props) {
- 
   let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
     useContext(loginContext);
 
@@ -38,14 +37,15 @@ function NavbarMain(props) {
   // }, []);
   const downloadNVDA = () => {
     // Replace this URL with the actual NVDA installer URL
-    const nvdaInstallerUrl = 'https://www.nvaccess.org/download/nvda/releases/2017.3/nvda_2017.3.exe';
+    const nvdaInstallerUrl =
+      "https://www.nvaccess.org/download/nvda/releases/2017.3/nvda_2017.3.exe";
 
     // Create an anchor element
-    const anchor = document.createElement('a');
+    const anchor = document.createElement("a");
 
     // Set the href and download attributes
     anchor.href = nvdaInstallerUrl;
-    anchor.download = 'NVDA_2023.3.exe';
+    anchor.download = "NVDA_2023.3.exe";
 
     // Append the anchor to the document
     document.body.appendChild(anchor);
@@ -62,7 +62,7 @@ function NavbarMain(props) {
   };
 
   return (
-    <Navbar expand="lg" className="p-0 body " >
+    <Navbar expand="lg" className="p-0 body ">
       <div className="container-fluid px-3 body1">
         <div className="flex">
           <Link className="nav-link text-black" to="/">
@@ -83,47 +83,60 @@ function NavbarMain(props) {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-              <button onClick={props.increaseFontSize} className="btn d-block m-auto w-100 fs-5 text-dark">   +A</button>
-                   
-                
-                
+                <button
+                  onClick={props.increaseFontSize}
+                  className="btn d-block m-auto w-100 fs-5 text-dark"
+                >
+                  {" "}
+                  +A
+                </button>
+
                 <Dropdown.Divider />
-                <button onClick={props.decreaseFontSize} className="btn d-block m-auto w-100 fs-5 text-dark">   -A</button>
+                <button
+                  onClick={props.decreaseFontSize}
+                  className="btn d-block m-auto w-100 fs-5 text-dark"
+                >
+                  {" "}
+                  -A
+                </button>
                 <Dropdown.Divider />
-                
+
                 <Dropdown.Divider />
-                <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#E50203" }}
-                    onClick={() => props.changeColor("#E50203")}>
-                  
+                <Dropdown.Item
+                  className="d-block w-75 m-auto p-3"
+                  style={{ backgroundColor: "#E50203" }}
+                  onClick={() => props.changeColor("#E50203")}
+                ></Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  className="d-block w-75 m-auto p-3"
+                  style={{ backgroundColor: "#AA9403" }}
+                  onClick={() => props.changeColor("#AA9403")}
+                ></Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  className="d-block w-75 m-auto p-3"
+                  style={{ backgroundColor: "#FF005B" }}
+                  onClick={() => props.changeColor("#FF005B")}
+                ></Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  className="d-block w-75 m-auto p-3"
+                  style={{ backgroundColor: "#FEED00" }}
+                  onClick={() => props.changeColor("#FEED00")}
+                ></Dropdown.Item>
+
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  className="text-center"
+                  onClick={props.resetColor}
+                >
+                  D
                 </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#AA9403" }}
-                    onClick={() => props.changeColor("#AA9403")}>
-                  
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#FF005B" }}
-                    onClick={() => props.changeColor("#FF005B")}>
-                  
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item className="d-block w-75 m-auto p-3"  style={{ backgroundColor: "#FEED00" }}
-                    onClick={() => props.changeColor("#FEED00")}>
-                  
-                </Dropdown.Item>
-               
-                <Dropdown.Divider />
-                <Dropdown.Item className="text-center" 
-                    onClick={props.resetColor}>
-                      D
-                  
-                </Dropdown.Item>
-                
               </Dropdown.Menu>
             </Dropdown>
             <ul className="navbar-nav menu ms-auto text-decoration-none">
               {!userLoginStatus ? (
-                
                 <ul className="navbar-nav menu ms-auto text-decoration-none">
                   <li className="nav-item dropdown">
                     <button
@@ -190,16 +203,7 @@ function NavbarMain(props) {
                       Home
                     </Link>
                   </li>
-                  <li className="nav-item dropdown">
-                    <Link
-                      className="nav-link "
-                      style={{ padding: "1.3rem" }}
-                      to="/login"
-                      onClick={logoutUser}
-                    >
-                      Sign Out
-                    </Link>
-                  </li>
+
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link "
@@ -213,29 +217,72 @@ function NavbarMain(props) {
                     <Link
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
-                      to="/products"
+                      to="/coursespage"
                     >
-                      Products
+                      Courses
                     </Link>
                   </li>
-                </ul>
-              )} {userLoginStatus && role == "admin" &&
-                <ul className="navbar-nav menu ms-auto text-decoration-none">
-                   
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link "
+                      style={{ padding: "1.3rem" }}
+                      to="/mockTestCard"
+                    >
+                      Tests
+                    </Link>
+                  </li>
+               
                  
+                </ul>
+              )}
+              {userLoginStatus && role == "admin" && 
+                <ul className="navbar-nav menu ms-auto text-decoration-none">
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link "
                       style={{ padding: "1.3rem" }}
                       to="/users"
                     >
-                     Users
+                      Users
                     </Link>
                   </li>
-                
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link "
+                      style={{ padding: "1.3rem" }}
+                      to="/login"
+                      onClick={logoutUser}
+                    >
+                      Sign Out
+                    </Link>
+                  </li>
                 </ul>
-}
-
+              }
+                            {userLoginStatus && role == "employee" && 
+                <ul className="navbar-nav menu ms-auto text-decoration-none">
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link "
+                      style={{ padding: "1.3rem" }}
+                      to="/user-profile"
+                    >
+                      User Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link "
+                      style={{ padding: "1.3rem" }}
+                      to="/login"
+                      onClick={logoutUser}
+                    >
+                      Sign Out
+                    </Link>
+                  </li>
+                  
+                </ul>
+              }
+              
               <li className="nav-item active">
                 {/* <div id="google_translate_element"></div> */}
               </li>

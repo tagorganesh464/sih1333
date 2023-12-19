@@ -122,7 +122,7 @@ const Public = () => {
     post: formData.post,
     method: formData.method,
     lastDate: formData.lastDate,
-    vacancies: formData.vacancies,
+    vacancies:Number(formData.vacancies) ,
     link: formData.link,
     role: formData.role,
     

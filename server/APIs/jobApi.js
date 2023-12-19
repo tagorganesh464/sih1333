@@ -46,14 +46,14 @@ jobapp.post(
 
       const content = `Hey ${newJob.name},\n\nA new job opportunity is available:\n\nOrganization: ${newJob.organisation}\nPost: ${newJob.post}\nJob Type: ${newJob.method}\nLast Date: ${newJob.lastDate}\nVacancies: ${newJob.vacancies}\nApplication Link: ${newJob.link}\n\nFasten your seat belt and grab the job!\n`;
       for (key of to) {
-        client.messages
-  .create({
-    body: article,
-    from: virtualTwilioNumber,
-    to: `+91${key.phone}`
-  })
-  .then(message => console.log('Message sent:', message.sid))
-  .catch(error => console.error('Error sending message:', error));
+  //       client.messages
+  // .create({
+  //   body: article,
+  //   from: virtualTwilioNumber,
+  //   to: `+91${key.phone}`
+  // })
+  // .then(message => console.log('Message sent:', message.sid))
+  // .catch(error => console.error('Error sending message:', error));
          
         sendEmail(key.email,content );
        
@@ -76,23 +76,23 @@ jobapp.post(
 
     const newJob = request.body;
 
-    const jobOfDB = await jobCollection.findOne({ post: newJob.post });
+    const jobOfDB = await jobCollection.findOne({position: newJob.position });
     if (jobOfDB !== null) {
       response.status(200).send({ message: "job already exists" });
     } else {
       const userCollection=request.app.get("userCollection");
       const to = await userCollection.find({ role: "employee" }).toArray();
 
-      const content = `Hey ${newJob.name},\n\nA new job opportunity is available:\n\nOrganization: ${newJob.organisation}\nPost: ${newJob.post}\nJob Type: ${newJob.method}\nLast Date: ${newJob.lastDate}\nVacancies: ${newJob.vacancies}\nApplication Link: ${newJob.link}\n\nFasten your seat belt and grab the job!\n`;
+      const content = `Hey ${newJob.name},\n\nA new job opportunity is available:\n\nOrganization: ${newJob.companyName}\nPost: ${newJob.position}\nJob Type: ${newJob.jobType}\nLocation: ${newJob.location}\nApplication Link: ${newJob.link}\n\nFasten your seat belt and grab the job!\n`;
       for (key of to) {
-        client.messages
-  .create({
-    body: article,
-    from: virtualTwilioNumber,
-    to: `+91${key.phone}`
-  })
-  .then(message => console.log('Message sent:', message.sid))
-  .catch(error => console.error('Error sending message:', error));
+  //       client.messages
+  // .create({
+  //   body: article,
+  //   from: virtualTwilioNumber,
+  //   to: `+91${key.phone}`
+  // })
+  // .then(message => console.log('Message sent:', message.sid))
+  // .catch(error => console.error('Error sending message:', error));
          
         sendEmail(key.email,content );
        

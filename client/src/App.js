@@ -19,8 +19,11 @@ import SoftwareDevelopment from "./components/software-development/SoftwareDevel
 import UpscIasFoundation from "./components/upsc-ias-foundation/UpscIasFoundation";
 import Law from "./components/law/Law";
 import About from "./components/about/About"
+import CoursesPage from "./components/coursesPage/CoursesPage";
+import MockTestCard from "./components/mockTestCard/MockTestCard";
 import Users from "./components/users/Users"
-// import EmpProfile from "./components/empprofile/EmpProfile";
+
+import UserProfile from "./components/userprofile/UserProfile";
 
 
 function App() {
@@ -67,6 +70,11 @@ function App() {
 
         },
         {
+          path: "/",
+          element: <Products />,
+        
+        },
+        {
           path: "/mock-tests",
           element: <MockTests />,
           children:[
@@ -104,6 +112,17 @@ function App() {
         {
           path: "/users",
           element: <Users />,
+        },
+        {
+          path: "/user-profile",
+          element: <UserProfile />,
+        },{
+          path: "/mockTestCard",
+          element: <MockTestCard />,
+        },
+        {
+          path: "/coursespage",
+          element: <CoursesPage/>,
         },
        
 

@@ -19,6 +19,7 @@ function Login() {
 
   let handleUserLogin = (userobj) => {
     loginUser(userobj);
+    console.log("succesfull login ")
   };
 
   useEffect(() => {
@@ -28,18 +29,48 @@ function Login() {
   }, [userLoginStatus]);
 
   useEffect(() => {
+    const updateEmailField = (variable) => {
+      const emailField = document.getElementById("email");
+      emailField.focus();
+      emailField.value += variable.toLowerCase(); // Convert to lowercase
+    };
     if (annyang) {
       const commands = {
+        "Write e-mail *tag": (variable) => {
+          document.getElementById("email").focus();
+          document.getElementById("email").value += variable;
+          updateEmailField(variable);
+        },
+
+        "Right email *tag": (variable) => {
+          document.getElementById("email").focus();
+          document.getElementById("email").value += variable;
+          updateEmailField(variable);
+        },
+
+        "E-mail *tag": (variable) => {
+          document.getElementById("email").focus();
+          document.getElementById("email").value += variable;
+          updateEmailField(variable);
+        },
+
+        "e-mail *tag": (variable) => {
+          document.getElementById("email").focus();
+          document.getElementById("email").value += variable;
+          updateEmailField(variable);
+        },
+
         "write email *tag": (variable) => {
           document.getElementById("email").focus();
           document.getElementById("email").value += variable;
+          updateEmailField(variable);
         },
         "write password *tag": (variable) => {
           document.getElementById("password").focus();
           document.getElementById("password").value += variable;
         },
         submit: () => {
-          document.getElementById("loginForm").submit();
+          document.getElementById("submit-button").click();
         },
       };
 
@@ -119,7 +150,8 @@ function Login() {
             )}
           </div>
 
-          <button type="submit" className="button-l d-block m-auto mt-5">
+          <button type="submit" id="submit-button"
+          className="button-l d-block m-auto mt-5">
             Login
           </button>
         </form>
