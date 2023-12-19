@@ -36,6 +36,26 @@ function NavbarMain(props) {
   //     }
   //   };
   // }, []);
+  const downloadNVDA = () => {
+    // Replace this URL with the actual NVDA installer URL
+    const nvdaInstallerUrl = 'https://www.nvaccess.org/download/nvda/releases/2017.3/nvda_2017.3.exe';
+
+    // Create an anchor element
+    const anchor = document.createElement('a');
+
+    // Set the href and download attributes
+    anchor.href = nvdaInstallerUrl;
+    anchor.download = 'NVDA_2023.3.exe';
+
+    // Append the anchor to the document
+    document.body.appendChild(anchor);
+
+    // Trigger a click on the anchor element
+    anchor.click();
+
+    // Remove the anchor from the document
+    document.body.removeChild(anchor);
+  };
   const dropdownStyle = {
     position: "relative",
     zIndex: 1000, // Set the zIndex to a value higher than other elements
@@ -103,7 +123,21 @@ function NavbarMain(props) {
             </Dropdown>
             <ul className="navbar-nav menu ms-auto text-decoration-none">
               {!userLoginStatus ? (
+                
                 <ul className="navbar-nav menu ms-auto text-decoration-none">
+                  <li className="nav-item dropdown">
+                    <button
+                      onClick={downloadNVDA}
+                      className="nav-link"
+                      style={{
+                        padding: "1.3rem",
+                        border: "none",
+                        background: "none",
+                      }}
+                    >
+                      Screen reader access
+                    </button>
+                  </li>
                   <li className="nav-item active">
                     <Link
                       className="nav-link  "
@@ -134,6 +168,19 @@ function NavbarMain(props) {
                 </ul>
               ) : (
                 <ul className="navbar-nav menu ms-auto text-decoration-none">
+                  <li className="nav-item dropdown">
+                    <button
+                      onClick={downloadNVDA}
+                      className="nav-link"
+                      style={{
+                        padding: "1.3rem",
+                        border: "none",
+                        background: "none",
+                      }}
+                    >
+                      Screen reader access
+                    </button>
+                  </li>
                   <li className="nav-item active">
                     <Link
                       className="nav-link  "

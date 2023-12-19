@@ -30,7 +30,7 @@ jobapp.get(
 
 jobapp.use(exp.json());
 jobapp.post(
-  "/add-job",
+  "/add-public",
   expressAsyncHandler(async (request, response) => {
     
     const jobCollection = request.app.get("jobCollection");
@@ -67,7 +67,44 @@ jobapp.post(
   })
 );
 
+jobapp.use(exp.json());
+jobapp.post(
+  "/add-private",
+  expressAsyncHandler(async (request, response) => {
+    
+    const jobCollection = request.app.get("jobCollection");
 
+    const newJob = request.body;
+
+    const jobOfDB = await jobCollection.findOne({ post: newJob.post });
+    if (jobOfDB !== null) {
+      response.status(200).send({ message: "job already exists" });
+    } else {
+      const userCollection=request.app.get("userCollection");
+      const to = await userCollection.find({ role: "employee" }).toArray();
+
+      const content = `Hey ${newJob.name},\n\nA new job opportunity is available:\n\nOrganization: ${newJob.organisation}\nPost: ${newJob.post}\nJob Type: ${newJob.method}\nLast Date: ${newJob.lastDate}\nVacancies: ${newJob.vacancies}\nApplication Link: ${newJob.link}\n\nFasten your seat belt and grab the job!\n`;
+      for (key of to) {
+        client.messages
+  .create({
+    body: article,
+    from: virtualTwilioNumber,
+    to: `+91${key.phone}`
+  })
+  .then(message => console.log('Message sent:', message.sid))
+  .catch(error => console.error('Error sending message:', error));
+         
+        sendEmail(key.email,content );
+       
+      }
+      console.log("job created successfully in api")
+     
+      await jobCollection.insertOne(newJob);
+
+      response.status(201).send({ message: "job created" });
+    }
+  })
+);
 
 
 

@@ -1,4 +1,3 @@
-
 import { loginContext } from "../../context/loginContext";
 import { imgDB } from "../config/firebase.config";
 import { v4 } from "uuid";
@@ -65,11 +64,13 @@ const Private = () => {
 
   const [formData, setFormData] = useState({
     img: "",
-    jobTitle: "",
-    post: "",
-    method: "",
+    companyName: "",
+    position: "",
+    jobType: "",
+    salaryStart: "",
+    salaryEnd: "",
     lastDate: "",
-    reservation: "",
+    location: "",
     link: "",
     role: "private",
   });
@@ -121,18 +122,19 @@ const Private = () => {
   };
   const modifiedFormData = {
     img: formData.img,
-    organisation: formData.organisation,
-    post: formData.post,
-    method: formData.method,
-    lastDate: formData.lastDate,
-    reservation: formData.reservation,
+    companyName: formData.companyName,
+    position: formData.position,
+    jobType: formData.jobType,
+
+    location: formData.location,
+
     link: formData.link,
     role: formData.role,
   };
 
   let formSubmit = (newUser) => {
     axios
-      .post(`/job-api/add-job`, modifiedFormData)
+      .post(`/job-api/add-private`, modifiedFormData)
       .then((response) => {
         if (response.status === 201) {
           console.log("successfull");
@@ -153,7 +155,6 @@ const Private = () => {
       });
     reset();
   };
-
 
   const [selectedRating, setSelectedRating] = useState(null);
 
@@ -212,41 +213,38 @@ const Private = () => {
                     />
                     <div className="text-start ps-4">
                       <h3 className="mb-3 font-weight-bold">
-                        {job.organisation}
+                        {job.companyName}
                       </h3>
-                      <p className="lead">{job.post}</p>
+                      <p className="lead">{job.position}</p>
                       {/* <span className="text-truncate me-3">
               <i className="fa fa-map-marker-alt text-primary me-2"></i>New York, USA
             </span> */}
-                      <span className="text-truncate me-3">
-                        <i className="far fa-clock text-primary me-2"></i>
-                        {job.method}
+                      <span class="text-truncate me-3">
+                        <i class="fa fa-map-marker-alt text-primary me-2"></i>
+                        {job.location}
                       </span>
                       <span className="text-truncate me-3">
-                        {/* <i className="far fa-money-bill-alt text-primary me-2"></i> */}
-                        <MdOutlineEventSeat className="me-2" />
-                        {job.reservation}% Reservation
+                        <i className="far fa-clock text-primary me-2"></i>
+                        {job.jobType}
                       </span>
                     </div>
                   </div>
                   <div className="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                     <div className="d-flex mb-3">
-                    <RatingContext.Provider value={{ selectedRating, setSelectedRating }}>
-      <StyledPost className="post" data-post-id="7712">
-        <StyledRatingContainer className="post-ratings-container">
-          <RatingButton icon="thumb_up" />
-          <RatingButton icon="thumb_down" />
-        </StyledRatingContainer>
-      </StyledPost>
-    </RatingContext.Provider>
+                      <RatingContext.Provider
+                        value={{ selectedRating, setSelectedRating }}
+                      >
+                        <StyledPost className="post" data-post-id="7712">
+                          <StyledRatingContainer className="post-ratings-container">
+                            <RatingButton icon="thumb_up" />
+                            <RatingButton icon="thumb_down" />
+                          </StyledRatingContainer>
+                        </StyledPost>
+                      </RatingContext.Provider>
                       <a className="btn btn-success mx-2" href={job.link}>
-                        Get Details
+                        Apply Now
                       </a>
                     </div>
-                    <small className="text-truncate">
-                      <i className="far fa-calendar-alt text-primary me-2"></i>
-                      Last Date: {job.lastDate}
-                    </small>
                   </div>
                 </div>
               </div>
@@ -287,15 +285,15 @@ const Private = () => {
               <i className="fa-solid fa-sitemap"></i>
               <input
                 type="text"
-                id="organisation"
-                name="organisation"
+                id="companyName"
+                name="companyName"
                 className="form-control "
                 placeholder="xyz"
-                value={formData.organisation}
+                value={formData.companyName}
                 onChange={handleChange}
               ></input>
-              <label htmlFor="organisation" className="text-dark">
-                Organisation
+              <label htmlFor="companyName" className="text-dark">
+                Company Name
               </label>
             </div>
 
@@ -303,62 +301,48 @@ const Private = () => {
               <i className="fa-solid fa-signs-post"></i>
               <input
                 type="text"
-                id="post"
-                name="post"
+                id="position"
+                name="position"
                 className="form-control "
-                value={formData.post}
+                value={formData.position}
                 onChange={handleChange}
                 placeholder="xyz"
               ></input>
-              <label htmlFor="post" className="text-dark">
-                post
+              <label htmlFor="position" className="text-dark">
+                Position
               </label>
             </div>
             <div className="inputbox2 form-floating">
-              <i className="fa-solid fa-calendar-check"></i>
+              <i class="fa-solid fa-location-crosshairs"></i>
               <input
                 type="text"
-                id="method"
+                id="location"
                 className="form-control "
                 placeholder="xyz"
-                name="method"
-                value={formData.method}
+                name="location"
+                value={formData.location}
                 onChange={handleChange}
               ></input>
-              <label htmlFor="method" className="text-dark">
-                Method Of Appointment
+              <label htmlFor="location" className="text-dark">
+                Location
               </label>
             </div>
             <div className="inputbox2 form-floating">
-              <i className="fa-solid fa-calendar-days"></i>
+              <i class="fa-solid fa-location-crosshairs"></i>
               <input
-                type="date"
-                id="lastDate"
+                type="text"
+                id="jobType"
                 className="form-control "
                 placeholder="xyz"
-                name="lastDate"
-                value={formData.lastDate}
-                onChange={handleDateChange}
-              ></input>
-              <label htmlFor="lastDate" className="text-dark">
-                Last Date
-              </label>
-            </div>
-            <div className="inputbox2 form-floating">
-              <i className="fa-solid fa-percent"></i>
-              <input
-                type="number"
-                id="reservation"
-                className="form-control "
-                placeholder="xyz"
-                name="reservation"
-                value={formData.reservation}
+                name="jobType"
+                value={formData.jobType}
                 onChange={handleChange}
               ></input>
-              <label htmlFor="reservation" className="text-dark">
-                Reservation
+              <label htmlFor="jobType" className="text-dark">
+                Job Type
               </label>
             </div>
+
             <div className="inputbox2 form-floating">
               <i className="fa-solid fa-link"></i>
               <input
@@ -371,7 +355,7 @@ const Private = () => {
                 onChange={handleChange}
               ></input>
               <label htmlFor="link" className="text-dark">
-                Details Doc Link
+                 Apply Link
               </label>
             </div>
 
@@ -407,11 +391,17 @@ const RatingButton = ({ icon }) => {
   };
 
   return (
-    <StyledRating className={`post-rating ${selectedRating === icon ? "post-rating-selected" : ""}`}>
-      <StyledRatingButton className="post-rating-button material-icons" onClick={handleRatingClick}>
+    <StyledRating
+      className={`post-rating ${
+        selectedRating === icon ? "post-rating-selected" : ""
+      }`}
+    >
+      <StyledRatingButton
+        className="post-rating-button material-icons"
+        onClick={handleRatingClick}
+      >
         {icon}
       </StyledRatingButton>
-     
     </StyledRating>
   );
 };

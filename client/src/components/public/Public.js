@@ -131,7 +131,7 @@ const Public = () => {
   let formSubmit = (newUser) => {
 
     axios
-      .post(`/job-api/add-job`, modifiedFormData)
+      .post(`/job-api/add-public`, modifiedFormData)
       .then((response) => {
         if (response.status === 201) {
           console.log("successfull");
