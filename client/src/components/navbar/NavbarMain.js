@@ -9,6 +9,7 @@ import { GiSpeaker } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { RiUserSearchFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa6";
+import PaidCourses from "../paidCourses/PaidCourses";
 function NavbarMain(props) {
   let [currentUser, error, userLoginStatus, loginUser, logoutUser, role] =
     useContext(loginContext);
@@ -39,27 +40,7 @@ function NavbarMain(props) {
   //     }
   //   };
   // }, []);
-  const downloadNVDA = () => {
-    // Replace this URL with the actual NVDA installer URL
-    const nvdaInstallerUrl =
-      "https://www.nvaccess.org/download/nvda/releases/2017.3/nvda_2017.3.exe";
-
-    // Create an anchor element
-    const anchor = document.createElement("a");
-
-    // Set the href and download attributes
-    anchor.href = nvdaInstallerUrl;
-    anchor.download = "NVDA_2023.3.exe";
-
-    // Append the anchor to the document
-    document.body.appendChild(anchor);
-
-    // Trigger a click on the anchor element
-    anchor.click();
-
-    // Remove the anchor from the document
-    document.body.removeChild(anchor);
-  };
+  
   const dropdownStyle = {
     position: "relative",
     zIndex: 1000, // Set the zIndex to a value higher than other elements
@@ -68,16 +49,23 @@ function NavbarMain(props) {
   return (
     <Navbar expand="lg" className="p-0 body ">
       <div className="container-fluid px-3 body1">
-        <div className="flex">
-          <Link className="nav-link text-black" to="/">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/6491/6491579.png"
-              width="55px"
-              height="55px"
-            ></img>
-            Udyog Saarathi
-          </Link>
-        </div>
+      <li className="nav-item dropdown">
+                  {/* Make the screen reader access a link */}
+                  <Link
+                    to="/screenReader"  // Redirect to "/screenReader" on click
+                    className="nav-link"
+                    style={{
+                      padding: "1.3rem",
+                      border: "none",
+                      background: "none",
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <FaVolumeUp style={{ marginRight: '5px' }} />
+                    Screen reader access
+                  </Link>
+                </li>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto  ">
@@ -142,19 +130,23 @@ function NavbarMain(props) {
             <ul className="navbar-nav menu ms-auto text-decoration-none">
               {!userLoginStatus ? (
                 <ul className="navbar-nav menu ms-auto text-decoration-none">
-                  <li className="nav-item dropdown">
-                    <button
-                      onClick={downloadNVDA}
-                      className="nav-link"
-                      style={{
-                        padding: "1.3rem",
-                        border: "none",
-                        background: "none",
-                      }}
-                    ><GiSpeaker />
-                      Screen reader access
-                    </button>
-                  </li>
+                    <li className="nav-item dropdown">
+                  {/* Make the screen reader access a link */}
+                  <Link
+                    to="/screenReader"  // Redirect to "/screenReader" on click
+                    className="nav-link"
+                    style={{
+                      padding: "1.3rem",
+                      border: "none",
+                      background: "none",
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <FaVolumeUp style={{ marginRight: '5px' }} />
+                    Screen reader access
+                  </Link>
+                </li>
                   <li className="nav-item active">
                     <Link
                       className="nav-link  "
@@ -185,19 +177,23 @@ function NavbarMain(props) {
                 </ul>
               ) : (
                 <ul className="navbar-nav menu ms-auto text-decoration-none">
-                  <li className="nav-item dropdown">
-                    <button
-                      onClick={downloadNVDA}
-                      className="nav-link"
-                      style={{
-                        padding: "1.3rem",
-                        border: "none",
-                        background: "none",
-                      }}
-                    ><GiSpeaker />
-                      Screen reader access
-                    </button>
-                  </li>
+                <li className="nav-item dropdown">
+                  {/* Make the screen reader access a link */}
+                  <Link
+                    to="/screenReader"  // Redirect to "/screenReader" on click
+                    className="nav-link"
+                    style={{
+                      padding: "1.3rem",
+                      border: "none",
+                      background: "none",
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <FaVolumeUp style={{ marginRight: '5px' }} />
+                    Screen reader access
+                  </Link>
+                </li>
                   <li className="nav-item active">
                     <Link
                       className="nav-link  "

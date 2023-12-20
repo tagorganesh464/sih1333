@@ -8,7 +8,7 @@ function MockTestCard() {
   let navigate = useNavigate();
 
   const goToMockTests = () => {
-    navigate("/mock-tests");
+    navigate("/mock-tests/upscmock");
   };
 
   return (
@@ -21,10 +21,7 @@ function MockTestCard() {
         ></img>
         <div className="card-body">
           <h5 className="card-title">Mock Tests</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+        
           <button className="btn btn-primary p-0 d-block m-auto">
             <Link
               id="link"

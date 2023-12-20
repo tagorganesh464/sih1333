@@ -24,10 +24,12 @@ import MockTestCard from "./components/mockTestCard/MockTestCard";
 import Users from "./components/users/Users"
 import Forgot from "./components/forgot/Forgot";
 import UserProfile from "./components/userprofile/UserProfile";
-import OTPInput from "./components/otpInput/OTPInput";
+import PaidCourses from "./components/paidCourses/PaidCourses";
+import UpscMock from "./components/upscmock/UpscMock";
 import Recovered from "./components/recovered/Recovered";
 import Reset from "./components/reset/Reset";
 import { createContext } from "react";
+import ScreenReader from "./components/screenReader/ScreenReader";
 
 function App() {
   const [page, setPage] = useState("login");
@@ -70,16 +72,14 @@ function App() {
           path: "/products",
           element: <Products />,
         
-        },{
-          path: "/courses",
-          element: <Courses />,
-
         },
         {
-          path: "/",
-          element: <Products />,
+          path: "/screenreader",
+          element: <ScreenReader />,
         
         },
+      
+       
         {
           path: "/mock-tests",
           element: <MockTests />,
@@ -87,6 +87,10 @@ function App() {
             {
               path: "law",
               element: <Law />,
+            },
+            {
+              path: "upscmock",
+              element: <UpscMock />,
             },
           ]
        
@@ -127,9 +131,23 @@ function App() {
           element: <MockTestCard />,
         },
         {
-          path: "/coursespage",
-          element: <CoursesPage/>,
+          path: "/paidcourses",
+          element: <PaidCourses />,
         },
+        {
+        path: "/courses",
+              element: <Courses />,
+              children:[
+                {
+                  path: "courses",
+                  element: <Law />,
+                },
+              ]
+            },
+            {
+          path: "/coursespage",
+          element: <CoursesPage/>},
+        
         {
           path: "/forgot",
           element: <Forgot/>,

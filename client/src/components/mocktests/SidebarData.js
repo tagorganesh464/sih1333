@@ -14,7 +14,7 @@ export const SidebarData = [
   },
   {
     title: 'UPSC',
-    path: '/mock-tests/UPSC',
+    path: '/mock-tests/upscmock',
     icon: <GiLion />,
     cName: 'nav-text-u'
   },
